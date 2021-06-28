@@ -39,7 +39,7 @@ class CategoryCard extends StatelessWidget {
               child: Column(
                 children: [
                   Spacer(),
-                  SvgPicture.asset(svgSrc),
+                  Hero(tag: title,child: SvgPicture.asset(svgSrc)),
                   Spacer(),
                   Text(
                     title,
@@ -47,7 +47,7 @@ class CategoryCard extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .title!
-                        .copyWith(fontSize: 15),
+                        .copyWith(fontSize: 15, height: .95),
                   )
                 ],
               ),

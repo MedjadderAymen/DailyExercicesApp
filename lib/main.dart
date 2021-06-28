@@ -1,4 +1,6 @@
 import 'package:daily_exercices_app/constants.dart';
+import 'package:daily_exercices_app/screens/details_screen.dart';
+import 'package:daily_exercices_app/widgets/bottom_nav_bar.dart';
 import 'package:daily_exercices_app/widgets/category_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Mediation App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: "Cairo", scaffoldBackgroundColor: kBackgroundColor),
       home: HomePage(),
     );
@@ -29,24 +32,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: Container(
-        height: 70,
-        color: Colors.white,
-        child: Row(
-          children: [
-            Column(
-              children: [
-                SvgPicture.asset("assets/icons/calendar.svg"),
-                Text("Today"),
-              ],
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: BottomNavBar(),
       body: Stack(
         children: [
           Container(
-            height: size.height * .50,
+            height: size.height * .40,
             decoration: BoxDecoration(
               color: Color(0XFFF5CEB8),
               image: DecorationImage(
@@ -64,6 +54,7 @@ class HomePage extends StatelessWidget {
                   Align(
                     alignment: Alignment.topRight,
                     child: Container(
+                      margin: EdgeInsets.only(top: 5),
                       alignment: Alignment.center,
                       height: 52,
                       width: 52,
@@ -82,7 +73,7 @@ class HomePage extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w900, height: 1.2),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 30),
+                    margin: EdgeInsets.symmetric(vertical: 20),
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -98,9 +89,9 @@ class HomePage extends StatelessWidget {
                   Expanded(
                     child: GridView.count(
                       crossAxisCount: 2,
-                      childAspectRatio: .85,
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 20,
+                      childAspectRatio: .9,
                       children: [
                         CategoryCard(
                           svgSrc: "assets/icons/Hamburger.svg",
@@ -115,7 +106,11 @@ class HomePage extends StatelessWidget {
                         CategoryCard(
                           svgSrc: "assets/icons/Meditation.svg",
                           title: "Meditation",
-                          press: () {},
+                          press: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                              return DetailsScreen();
+                            }));
+                          },
                         ),
                         CategoryCard(
                           svgSrc: "assets/icons/yoga.svg",
